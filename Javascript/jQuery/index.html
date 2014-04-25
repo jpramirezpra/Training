@@ -1,0 +1,157 @@
+<html>
+<head>
+	<title>jQuery Lessons</title>
+	<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+	<script src="jquery-1.10.2.js"></script>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="bright.css">
+</head>
+<body>
+<div class="container">
+	<h1>The Website of Jose</h1>
+
+	<p>
+		This is where the wild goose goes to pick up some eggs and bacon for the little children in the forrest who do not know anything but candy and pumpkins. they feast and feast and never do they sleep they are but trolls and monsters when they creep.
+	</p>
+
+	<ul class="emphasis">
+		<li>item</li>
+		<li>item2</li>
+		<li>item3</li>
+		<li>
+			<ul>
+				<li>this is an item</li>
+			</ul>
+		</li>
+	</ul>
+
+	<div id="helloid">
+		<div>
+			<p>This is a paragraph under the name id</p>
+		</div>	
+	</div>
+
+	<div id="boxes">
+		<div class="box green"> green</div>
+		<div class="box red"> red</div>
+		<div class="box"> box</div>
+		<div class="box blue">blue </div>
+	</div>
+
+	<button data-file="bright">Bright</button>
+	<button data-file="dark">Dark</button>
+</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('li:first-child').addClass('emphasis');
+
+			$('ul.emphasis').find('li').css('color','green');
+
+			$('ul.emphasis').children('li:nth-child(2)').text("hello there");
+
+			$('ul.emphasis').children('li').eq(0).css('color','red');
+
+			$('li').parent('ul').removeClass('emphasis');
+
+		});
+
+		(function() {
+			//change last div
+			$('.boxes')
+			var link = $('link').last();
+			$('button').on('click', function(){
+				var $this = $(this),
+					stylesheet = $this.data("file");
+				//$(this).text("changed");//must wrap this in jQuery so that it will have the methods
+				//var stylesheet = $(this).text().toLowerCase();
+				//var stylesheet = $(this).attr("data-file");
+				link.attr("href",stylesheet+".css");
+				
+				$this
+					.siblings('button')
+						.removeAttr('disabled')
+						.end()
+					.attr('disabled','true');	
+			});
+		})();
+
+		/* SELECTORS *****************************************************/
+		/**************************************************/
+		/*
+			attribute selector:
+			::::Prefix
+			"elem[attribute]" --> div[id]
+				--Has the attribute
+			"elem[attribute|='value']" --> a[hreflang|='en']
+				--All links that have an attribute hreflang = en or href en followed by a hyphen
+			::: Contains
+			*=  "elem[attribute*='value']" --> input[name*='man']
+				-- All inputes that have man in the name
+			~=  "elem[attribute~='value']" --> input[name~='man']
+				-- All inputs with the word man in them, must be spaces in between
+			$=  "elem[attibute$='value']" --> input[name$='man']
+				--Allinputs that end in man
+			^= "elem[attribute^='value']" --> input[name^='man']
+				--All inputs that start with man
+			!= "elem[attribute!='value']" --> input[name!='man']
+				--All inputs where name not equal to man
+			Multiple attributes just add anothe []
+			Multiple Selectors just add a ,
+
+
+			:::Parent Child
+			"Parent > Child" --> selects all child elements of parent
+				--> .container > div --> will bring all divs that have a parent of container
+
+			"ancestor Descendant" --> selects all elems that have ancestor, does not have to be direct parent
+				--> "form input" and "form fieldset input" will both reach input
+
+			"elem:contains("value")" --> selects all elements that contain text of value --> div:contains("john")
+
+			"elem:eq(index)" --> selects element at index from list if negative will count backwards
+
+			"elem:even" and "elem:odd" --selects all elements that are even or odd from list
+
+			"elem:gt(index)" --> selects elements that are higher than the index
+
+			"elem:first-child", "elem:last-child" --> "div span:first-child"
+				--Selects all spans that are the first child of a div
+			
+			"elem:first-of-type", "elem:last-of-type" --> "span:first-of-type"
+				-- Selects the first elem of defined type of the same element
+
+			"elem:only-of-type" --> span:only-of-type
+				-- Select all elements that are only child of their parents or the only span
+
+			"elem:only-child" --> span:only-child
+				--selects all elem that are only children
+
+			"elem:first" , "elem:last"--> "tr:first"
+				--Will select the first element, equal to :eq(0) and lt(1)
+			
+			"elem:has()" --> "div:has(p)"
+				--find div that has a p in any of its decendents
+
+			"elem:nth-child(index)" --> span:nth-child(3)
+				-- selects elem that are nth child of parent
+
+			"elem:nth-of-type(index)" --> span:nth-of-type-selector(2)
+				-- selects elem that are nth child of the same type of parent
+
+			:button
+			:checkbox
+			:checked
+			:disabled
+			:empty
+			:enabled
+			:file
+			:focus
+			:header
+			:lang()
+			:root
+
+
+		*/
+	</script>
+</body>
+</html>

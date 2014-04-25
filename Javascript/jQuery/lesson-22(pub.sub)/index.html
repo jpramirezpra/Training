@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>Custom Events</title>
+</head>
+<body>
+
+<h1>Hi There</h1>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+<script>
+	
+// PubSub
+(function( $ ) {//$ will always refer to jQuery because it was passed to the SIAF
+	var o = $( {} );//will make a jQuery instance
+
+	$.each({
+		trigger: 'publish',
+		on: 'subscribe',
+		off: 'unsubscribe'
+	}, function( key, val ) {
+		jQuery[val] = function() {//Cannot use jQuery.val to set up the new methods, instead need jQuery[val] to use the value not val as the method
+			o[key].apply( o, arguments );//funciton will be equal to object.key which is the trigger, on, off and it will call the the right funciton when invoked
+		};//arguments keyword will give access to all arguments accepted by the funciton
+	});
+})( jQuery );
+
+//Query to the twitter API
+$.getJSON('http://search.twitter.com/search.json?q=dogs&callback=?', function( results) { 
+	$.publish( 'twitter/results', results );//announce that 'twitter/results' is ready to go
+});
+
+// things to do when the announcement has been made
+$.subscribe( 'twitter/results', function( e, results ) {
+	$('body').html(
+		$.map( results.results, function( obj, index) {
+			return '<li>' + obj.text + '</li>';
+		}).join('')
+	);
+});
+
+
+</script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>Custom Effect Methods</title>
+	<style>
+	p { margin-top: 0;}
+	.box {  
+		background-color: red;
+		width: 400px;
+		position:relative;
+		padding:2em;
+	}
+	</style>
+</head>
+<body>
+
+<h2>Click Me</h2>
+<h1>Reveal</h1>
+<div class=content>
+	<p>
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</p>
+	<p>
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</p>	
+</div>
+
+<div class="box">
+	<h2>Content Goes here</h2>
+	<p>
+		kjsdhklfjhd ksajd hsakjhf sadklj hsdlkfh sakfd sa
+		skdfjhs kdlfjhsa dflkjshdfueiuhwaf
+		ksj hflksjdhfksjdfhksajdhfksdjhfksjahdshfiuiuehfksj
+		sdfdiusu fshdf ksahfishs kjhsd fiusf kdjhfsdfuh
+
+	</p>	
+</div>
+<p><button>Click Me</button></p>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script>
+
+
+(function(){
+	var content = $('div.content').hide();
+
+	// $.fx.speeds._default = 2000;
+	$.fx.speeds.tortoise = 5000;
+	//adding own custom speed
+
+
+	$('h1').on('click', function() {
+		$(this).next().slideDown('fast');//could use tortise
+	})
+
+	$.fn.flashFlash = function(speed, easing, callback) {
+		var $this = $(this);
+		$this.slideDown(500, function() {//callback function
+			$this.delay(1000).slideUp(500);//delay will tell jQuery to wait to run the next function
+		})
+	}
+
+	$('h2').on('click',function(){
+		content.flashFlash();		
+	});
+
+	var box = $('div.box'),
+		fontSize = parseInt(box.css('font-size')),
+		win = $(window),
+		w= win.width() / 2 - box.outerWidth()/2,
+		h= win.height() / 2 - box.outerHeight();
+		//box.width will not take into account the padding need to 
+
+		console.log("width: "+ w);
+		console.log("height: "+ h);
+
+
+	$('button').on('click',function(){
+		box.animate({
+			'left':w,
+			'top':h,
+			'position':'absolute'//dynamically add the position value so as not to loose button behind the box 
+		});
+
+		//Change fontSize
+		//box.css('font-size',fontSize+=10);//Not relative only makes it 25 px
+
+		// box.css('font-size','+=5');//relative for the fontsize
+
+		//Change box width and placement
+		// box.animate({
+		// 	'width':290,
+		// 	'top':100,
+		// 	'left':500
+		// },300);
+
+		//Queue will run animate one after another
+		// box.animate({'top':100},300).animate({'left':500},400);
+		// //Will run these two one after another if you want to run them at tehs ame time with differetn durations need to set second object queue to false
+
+		//Example of options object on animate
+		// box.animate({
+		// 	'width':600
+		// }, {
+		// 	duration:500,
+		// 	complete:function(){
+		// 		console.log('completed');
+		// 	},
+		// 	step : function(){
+		// 		console.log("The font size i " + $(this).css('font-size'));
+		// 	},
+		// 	queue:false //if equal to true then it will run at the same time as the other animate in the queue
+		// })
+		// .animate({'top': '300'},{queue:false,duration:500});
+
+	})
+
+})()
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>jQuery Events 201</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<dl>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7.</dd>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7.</dd>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7.</dd>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7.</dd>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7.</dd>
+</dl>
+
+	<h2>Click Me</h2>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+<script>
+
+(function() {
+	//$('dd').filter(':nth-child(n+4)').addClass('hide');
+
+	$('dd:gt(0)').addClass('hide');
+
+	$('dl').on('mouseenter', 'dt', function() {
+		$(this)
+			.prev()
+				.slideDown(200)
+				.siblings('dd')
+					.slideUp(200);
+	});
+
+	$('h2').bind('click', function(){
+		console.log("click");
+		var cloned = $(this).clone(true); // pass true to clone method it will copy over the event handlers
+		cloned.appendTo('body');
+		console.log(cloned);
+	});
+
+	//live attaches the event hanlder to the document
+	//delegate need to specify the parent context and append the object to the parent context
+
+})();
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>Q&A</title>
+</head>
+<body>
+
+<script id='blogTemplate' type='tuts/template'>
+	<h2> {{title}} </h2>
+	<img src={{thumbnail}} alt={{title}}>
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script>
+
+(function() {
+	var content = [
+		{
+			title: 'My awesome blog post',
+			thumbnail: 'http://d2o0t5hpnwv4c1.cloudfront.net/1137_terminal/preview.png',
+		},
+		{
+			title: 'My second awesome blog post',
+			thumbnail: 'http://d2o0t5hpnwv4c1.cloudfront.net/1133_newrelic/200.jpg',
+		},
+		{
+			title: 'My third blog post',
+			thumbnail: 'http://d2o0t5hpnwv4c1.cloudfront.net/1137_terminal/preview.png',
+		}
+	],
+		template = $.trim( $('#blogTemplate').html() ),
+		frag = '';//set to empty string as to not concat undefined when used below
+
+
+
+	$.each( content, function( index, obj ) {//each method $.each(array, function)
+		//will be adding the HTML created by the replace function below to a long string
+		frag +=
+							// regex will call replace to find all instances of {{title}}
+							//the i  = case insensitive
+							//the g = global (find ALL instances)
+			template.replace( /{{title}}/ig, obj.title ) 
+					.replace( /{{thumbnail}}/ig, obj.thumbnail );	
+	});
+
+	//append sting to the DOM
+	$('body').append(frag);
+
+})();
+
+</script>
+</body>
+</html>
