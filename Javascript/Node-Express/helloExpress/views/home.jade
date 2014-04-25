@@ -1,0 +1,59 @@
+extends layout
+
+block content
+	include mixins
+
+	h1 Hello Element
+	h2= title
+
+	- var name = "jose";
+	- var fn = function(){return "hello, Express"};
+	- var escaped = "<em>Truth</em>";
+	- var users = [{name: "Jose", email: "jose@gmail.com"},{name: "Dwight", email: "Dwight@gmail.com"},{name: "James", email: "James@gmail.com"},{name: "Chandler", email: "Chandler@gmail.com"}];
+	- var users2 = [{name: "Jose", email: "jose@gmail.com"},{name: "Dwight", email: "Dwight@gmail.com"},{name: "James", email: "James@gmail.com"},{name: "Chandler", email: "Chandler@gmail.com"}];
+
+
+
+	ul#nav
+		li.current One
+		li Two
+		li Three
+		li #{name}
+		li= fn()
+		li #{escaped} = not escaped (#)
+		li !{escaped} = escaped (!)
+
+	p This is a lot of text that I want to put in this one place
+		a(href="/", rel="nofollow") Go to Index
+
+	pre
+		|This is alseo
+		|Alot of text that I 
+		|want to put right here
+
+	- var follower = 45 
+
+	- if(follower === 0){ //This is without Native Jade If Statements
+		p You have no followers!	
+	-} else if(follower === 1){
+		p You have One Follower
+	-} else {
+		p You have #{follower} followers.
+	-}
+
+	p
+		if follower === 0
+			|You have no followers
+		else if follower ===  1
+			|You have one follower
+		else
+			|You have #{follower} followers
+	ul
+		each user, i in users
+			li #{i+1}: #{user.name} &lt; #{user.email} &gt;
+
+	p With mixin
+
+	ul
+		each user in users2
+			+userLi(user)
