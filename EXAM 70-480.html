@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EXAM 70-480</title>
+</head>
+<body>
+
+<h1>EXAM 70-480</h1>
+<ul>
+	<li>
+		<hgroup>
+		<h4>Create the document structure</h4>
+		<h5>Structure the UI by using semantic markup, including for search engines and screen readers (Section, Article, Nav, Header, Footer, and Aside); create a layout container in HTML5</h5>
+		</hgroup>
+	</li>
+		<pre>
+		&lt;html&gt;
+		&lt;head&gt;
+			&lt;title&gt;&lt;/title&gt;
+		&lt;/head&gt;
+		&lt;body&gt;
+		&lt;header&gt;
+			&lt;nav&gt;&lt;/nav&gt;
+		&lt;/header&gt;
+		&lt;article&gt;
+			&lt;section&gt;
+				&lt;hgroup&gt;
+					&lt;h1&gt;&lt;/h1&gt;
+					&lt;h2&gt;&lt;/h2&gt;
+				&lt;/hgroup&gt;
+			&lt;/section&gt;
+		&lt;/article&gt;
+		&lt;aside&gt;&lt;/aside&gt;
+		&lt;footer&gt;&lt;/footer&gt;
+		&lt;/body&gt;
+		&lt;/html&gt;
+		</pre>
+	<hr>
+	<li>
+		<hgroup>
+		<h4>Write code that interacts with UI control</h4>
+		<h5>Programmatically add and modify HTML elements; implement media controls; implement HTML5 canvas and SVG graphics</h5>
+		</hgroup>
+	</li>
+	
+
+	<ul>
+		<li> <code>document.createElement('DIV'); //Element name must be in all CAPS</code> </li>
+		<li> <code>document.getElementById('idName');</code> </li>
+		<li> <code>document.getElementById('idName').setAttribute("href","http://link.com");</code> </li>
+		<li> <code>document.getElementById("exampleDiv").hasAttribute('href'); // will return if elem has attribute</code> </li>
+	 	<li> <code>document.getElementById("exampleDiv").getAttribute('href'); // will return the attribute</code> </li>
+		<li> <code>document.getElementById('idName').style.border = "1px solid black"; // can use CSS properties names after .style but they must camel cased since javascript will not handle the dashes like in borderColor versus border-color</code> </li>
+		<li> <code>document.querySelectorAll('#idName'); //Will use CSS Selectors, querySelector will return only the first one</code> </li>
+		<li> <code>document.getElementById("exampleDiv").appendChild(elem); //elem should be a DOM element that was either created or selected</code> </li>
+	 	<li> <code>document.getElementById("exampleDiv").removeChild(elem);</code> </li>
+	 	<li> <code>document.getElementById("exampleDiv").replaceChild(newChild, oldChild);</code> </li>
+
+	 	<li>
+	 		<figure>
+	 			<audio src="some.mp3" controls ></audio>
+	 			<figcaption>Audio with Controls keyword</figcaption>
+	 		</figure>
+	 	</li>
+	 	<li>
+	 		<figure>
+	 			<audio controls autoplay loop preload="auto">
+					<source src="some.mp3">
+					<source src="someOther.mp3">
+					Text to show if audio does not work
+				</audio>
+				<figcaption>Loading various sources
+				</figcaption>
+	 		</figure>
+	 	</li>
+	 	<li>
+	 		<figure>
+	 			<video controls>
+				  <source src="foo.ogg" type="video/ogg"> <!-- Picked by Firefox -->
+				  <source src="foo.mov" type="video/quicktime"> <!-- Picked by Safari -->
+				  I'm sorry; your browser doesn't support HTML5 video.
+				</video>
+				<figcaption> Video Controls </figcaption>
+	 		</figure>
+		</li>
+		<li> CANVAS
+			<pre>
+	var canvas = document.getElementById('canvasTest'),
+		ctx = canvas.getContext('2d');
+
+		ctx.font="30px Arial";
+		ctx.fillText("Hello From Canvas",10,30);
+			</pre>
+			<canvas id="canvasTest">
+				Text to show if canvas is not supported
+			</canvas>
+			<script type="text/javascript">
+				var canvas = document.getElementById('canvasTest'),
+					ctx = canvas.getContext('2d');
+
+					ctx.font="30px Arial";
+					ctx.fillText("Hello From Canvas",10,30);
+			</script>
+		</li>
+		<li>SVG
+			<pre>
+	&lt;svg width="200" height="200"&gt;
+		&lt;rect fill="rgb(0,0,255)" x="10" y="10" width="180" height="180" /&gt;
+		&lt;circle cx="40" cy="50" r="20" stroke="black" fill="yellow"/&gt;
+	&lt;/svg&gt;
+			</pre>
+
+			<svg width="200" height="200">
+				<rect fill="rgb(0,0,255)" x="10" y="10" width="180" height="180" />
+				<circle cx="40" cy="50" r="20" stroke="black" fill="yellow"/>
+				<!-- Performance implications becacuse of high resource -->
+			</svg>
+		</li>
+	</ul>
+	<hr>
+	<li>
+		<hgroup>
+			<h4>Apply styling to HTML elements programmatically</h4>
+			<h5>Change the location of an element; apply a transform; show and hide elements</h5>
+		</hgroup>
+	</li>	
+	<h3>Css Positions</h3>
+	<ul>
+		<li>absolute - positioned relative to the first parent element that has position other than static, or the &lt;html&gt; </li>
+		<li>relative - moving the element will be based on its normal positioning</li>
+		<li>fixed - will note move even if window is scrolled</li>
+		<li>static</li>
+	</ul>
+
+	<style type="text/css">
+	.displayExample div{
+		height:20px;
+		width:30px;
+		background-color: red;
+		border:1px solid black;
+	}
+	</style>
+
+	<h3>Css Display</h3>
+	<p><code>display:none</code> will remove the element form the page while <code>visibility:hidden</code> will just hide it even though it will take up the same space </p>
+	<div class="displayExample">
+		Both Divs Showing
+		<div>1</div>
+		<div>2</div>
+		First div is <code>visibility:hidden</code>
+		<div style="visibility:hidden">1</div>
+		<div>2</div>
+		First div is <code>display:none</code>
+		<div style="display:none">1</div>
+		<div>2</div>
+	</div>
+
+	<h3>Css Transitions</h3>
+	<p>In order to understand transitions we must first understand transformations. transformations are the actions we can impose on the elements of the page to move them up down, rotate, scale they are listed below</p>
+	<ul>
+		<li>scale(1.2) - must pass a number 1 = 100%</li>
+		<li>rotate(45deg) - will rotate the element on the page, must pass a number and follow with deg</li>
+		<li>rotateX(45deg) and rotateY(45deg) - will rotate the element on the x and y axis (3D effect) </li>
+		<li>translate(12px,12px) - will move the element the number of pixels translate(x,y)</li>
+		<li>skewX(12deg,12deg) - will turn the element to the given angle the number of deg skew(x,y)</li>
+	</ul>
+
+	<p>These transforms are applied to certain elements or elements states like div:hover to cause an effect. In order to transition you must add the <code>transition</code> property as well as the transform</p>
+
+	<p>The <code>transition</code> will be passed the 'property'(can be width, translate, all, ect.) to apply the transition to, the 'duration'(must be in seconds '3s'), the 'transition timing function'(I list them below), and 'delay'(must be in seconds '3s')</p>
+
+	<ul>
+		<li>linear - constant speed</li>
+		<li>ease - slow -> fast -> slow</li>
+		<li>easi-in - start slow</li>
+		<li>ease-out - end slow</li>
+		<li>ease-in-out - starts and ends slowly</li>
+		<li>cubic-bezier - ** (p0,p1,p2,p3) define specific values for transition by drawing a cubic bezier curve </li>
+	</ul>
+
+	<pre>
+		div.transitionExample{
+			height: 100px;
+			width: 200px;
+			background-color: red;
+			position: absolute;
+			transition: all 2s ease-in-out;
+    		-webkit-transition: all 2s ease-in-out; /** Chrome & Safari **/
+    		-moz-transition: all 2s ease-in-out; /** Firefox **/
+    		-o-transition: all 2s ease-in-out; /** Opera **/
+		}
+
+		div.transitionExample:hover{
+			transform: translate(10px,0px) scale(1.3) rotate(45deg);
+
+		}
+		example below
+	</pre>
+
+	<style type="text/css">
+		div.transitionExample{
+			height: 100px;
+			width: 200px;
+			background-color: red;
+			position: absolute;
+			transition: all 2s ease-in-out;
+    		-webkit-transition: all 2s ease-in-out; /** Chrome & Safari **/
+    		-moz-transition: all 2s ease-in-out; /** Firefox **/
+    		-o-transition: all 2s ease-in-out; /** Opera **/
+		}
+
+		div.transitionExample:hover{
+			transform: translate(10px,0px) scale(1.3) rotate(45deg);
+
+		}
+	</style>
+
+	<div style="position:relative; height:200px">
+		<div class="transitionExample"></div>
+	</div>
+
+	<h3>Media Queries</h3>
+
+	<p>to do</p>
+	<hr>
+	<li>
+		<hgroup>
+			<h4>Implement HTML5 APIs</h4>
+			<h6>Implement storage APIs, AppCache API, and Geolocation API</h6>
+		</hgroup>
+	</li>
+
+	<h3>Storage API</h3>
+	<p>HTML5 has 2 new objects for storing data on the client</p>
+	<ul>
+		<li>window.localStorage - SET: localStorage.setItem("name","value"); GET: localStorage.getItem("name");</li>
+		<li>code.sessionStorage - SET: sessionStorage.attributeName = "Value"; GET: sessionStorage.attributeName</li>
+	</ul>
+
+	<h3>App Cache</h3>
+	<p>This allows applications to be cached and accessible without internet connections. To enable it you must include manifest attribute in the html tag. You will need to include a Manifest File to specify what needs to be cached</p>
+
+	<p><code>&lt;html manifest='manifestFileName.appcache'&gt;</code></p>
+
+	<p>The manifest file has three sections listed below</p>
+	<ul>
+		<li>CACHE MANIFEST - list Files to Cache</li>
+		<li>NETWORK - List Files that should never be cached</li>
+		<li>FALLBACK - The pages to serve if a resource is unavailable</li>
+	</ul>
+
+	<p>*note that once an application is cached it remains cached until the users clears cache, manifest file is modified, the application cache is programatically updated</p>
+
+	<h3>Geolocation</h3>
+	<p>The object for Geolocation is the <code>navigator.geolocation</code> and the main functions would be the: </p>
+	<ul>
+		<li>getCurrentPosition() - returns an object an object with position data</li>
+		<li>watchPosition() - returns and continue to return the updated position of the user</li>
+		<li>clearWatch() - stops the tracking of the user</li>
+	</ul>
+
+	<p>both getCurrentPosition() and watchCurrentPosition() return an object that can be passed into an function. The object has the following attributes</p>
+
+	<ul>
+		<li>object.coords.latitude</li>
+		<li>object.coords.longitude</li>
+		<li>object.coords.accuracy </li>
+		<li>object.coords.altitude</li>
+		<li>object.coords.altitudeAccuracy</li>
+		<li>object.coords.heading</li>
+		<li>object.coords.speed</li>
+		<li>object.timestamp</li>
+	</ul>
+<hr>
+<li>
+	<hgroup>
+		<h4>Find elements by using CSS selectors and jQuery</h4>
+		<h6>Choose the correct selector to reference an element; define element, style, and attribute selectors; find elements by using pseudo-elements and pseudo-classes (for example, :before, :first-line, :first-letter, :target, :lang, :checked, :first-child)</h6>
+	</hgroup>
+</li>
+<pre>
+attribute selector:
+			::::Prefix
+			"elem[attribute]" --> div[id]
+				--Has the attribute
+			"elem[attribute|='value']" --> a[hreflang|='en']
+				--All links that have an attribute hreflang = en or href en followed by a hyphen
+			::: Contains
+			*=  "elem[attribute*='value']" --> input[name*='man']
+				-- All inputes that have man in the name
+			~=  "elem[attribute~='value']" --> input[name~='man']
+				-- All inputs with the word man in them, must be spaces in between
+			$=  "elem[attibute$='value']" --> input[name$='man']
+				--Allinputs that end in man
+			^= "elem[attribute^='value']" --> input[name^='man']
+				--All inputs that start with man
+			!= "elem[attribute!='value']" --> input[name!='man']
+				--All inputs where name not equal to man
+			Multiple attributes just add anothe []
+			Multiple Selectors just add a ,
+
+
+			:::Parent Child
+			"Parent > Child" --> selects all child elements of parent
+				--> .container > div --> will bring all divs that have a parent of container
+
+			"ancestor Descendant" --> selects all elems that have ancestor, does not have to be direct parent
+				--> "form input" and "form fieldset input" will both reach input
+
+			"elem:contains("value")" --> selects all elements that contain text of value --> div:contains("john")
+
+			"elem:eq(index)" --> selects element at index from list if negative will count backwards
+
+			"elem:even" and "elem:odd" --selects all elements that are even or odd from list
+
+			"elem:gt(index)" --> selects elements that are higher than the index
+
+			"elem:first-child", "elem:last-child" --> "div span:first-child"
+				--Selects all spans that are the first child of a div
+			
+			"elem:first-of-type", "elem:last-of-type" --> "span:first-of-type"
+				-- Selects the first elem of defined type of the same element
+
+			"elem:only-of-type" --> span:only-of-type
+				-- Select all elements that are only child of their parents or the only span
+
+			"elem:only-child" --> span:only-child
+				--selects all elem that are only children
+
+			"elem:first" , "elem:last"--> "tr:first"
+				--Will select the first element, equal to :eq(0) and lt(1)
+			
+			"elem:has()" --> "div:has(p)"
+				--find div that has a p in any of its decendents
+
+			"elem:nth-child(index)" --> span:nth-child(3)
+				-- selects elem that are nth child of parent
+
+			"elem:nth-of-type(index)" --> span:nth-of-type-selector(2)
+				-- selects elem that are nth child of the same type of parent
+
+			:button
+			:checkbox
+			:checked
+			:disabled
+			:empty
+			:enabled
+			:file
+			:focus
+			:header
+			:lang()
+			:root
+</pre>
+
+<hr>
+
+<li>
+	<hgroup>
+		<h4>Validate user input by using HTML5 elements</h4>
+	<h6>Choose the appropriate controls based on requirements; implement HTML input types and content attributes (for example, required) to collect user input</h6>	
+	</hgroup> 
+</li>
+
+	<h3>Input Types</h3>
+	<ul>
+		<li>color {chrome and opera}</li>
+		<li>date</li>
+		<li>datetime (includes timezones)</li>
+		<li>datetime-local(no timezones)</li>
+		<li>email</li>
+		<li>month</li>
+		<li>number</li>
+		<li>range (has extra attributes such as min and max</li>
+		<li>search</li>
+		<li>url</li>
+	</ul>
+
+	<h3>Input Attributes</h3>
+	<ul>
+		<li>required - will stop form from submitting if empty</li>
+		<li>pattern - pass regex for validation, title attribute will describe pattern</li>
+	</ul>
+<hr>
+<li>
+	<hgroup>
+		<h4>Implement a callback</h4>
+		<h6>Receive messages from the HTML5 WebSocket API; use jQuery to make an AJAX call; wire up an event; implement a callback by using anonymous functions; handle the “this” pointer</h6>	
+	</hgroup>
+</li>
+
+
+	<h3>Web Socket</h3>
+	<p>The WebSocket specification defines an API establishing "socket" connections between a web browser and a server.</p>
+	<p>
+		<code>var connection = new WebSocket('ws://address.serversidesocket.com/app',['soap','xmpp'])</code>
+	</p>
+	<p>We need to open up a socket connection with the address of the server, notice the Url for the protocol begins with is 'ws' for websocket and 'wss' for secure web socket. The second argument are the optional subprotocols to use. </p>
+
+	<p>
+		<div>We will have three different functions that will run depending on what comes back from the server.</div>
+		<div>when the connection is open, we will send some data to the server</div>
+		<code>connection.onopen = function(){ connection.send('DataString'); };</code>
+	</p>
+	<p>
+		<div>When we get an error back from the Server</div>
+		<code>connection.onerror = function(err){ console.log(err); };</code>
+	</p>
+	<p>
+		<div>Do something with the message from the server</div>
+		<code>connection.onmessage = function(e){ console.log(e.data); };</code>
+	</p>
+	<p>
+		<div>We can also send data to the server in our code</div>
+		<code>connection.send('Your message');</code>
+	</p>
+
+	<h3>Web Worker</h3>
+	<p>Dedicated Web Workers provide a simple means for web content to run scripts in background threads. Once created, a worker can send messages to the spawning task by posting messages to an event handler specified by the creator.</p>
+
+	<p>You begin by writing the 'WebWorker' process in a separate .js file. Once you create the Webworker, you will be able to post messages between both threads to send information back and forth.</p>
+	<p>
+		main.js
+		<code>var myWorker = new Worker("webworker.js");</code><br>
+		<code>myWorker.onmessage = function(e) { console.log("message from the worker" + e.data); }</code><br>
+		<code>myWorker.postMessage("ali"); // the post message function will send data to the webworker</code><br>
+	</p>
+	<p>
+		webworker.js
+		<code>postMessage("This is a message sent to the main.js file");</code><br>
+		<code>onmessage = function(e) { postMessage(e.data) }; // run function when you recieve message from main.js</code><br>
+	</p>
+	<p> <code>myWorker.terminate()</code> to terminate the worker</p>
+
+
+	<h3>jQuery Ajax Calls</h3>
+	
+<hr>
+<li>
+	<hgroup>
+		<h4>Serialize, deserialize, and transmit data</h4>
+		<h6>Binary data; text data (JSON, XML); implement the jQuery serialize method; Form.Submit; parse data; send data by using XMLHTTPRequest; sanitize input by using URI/form encoding</h6>	
+	</hgroup>
+</li>
+
+<hr>
+<li>
+	<hgroup>
+		<h4>Create a flexible content layout</h4>
+		<h6>Implement a layout using a flexible box model; implement a layout using multi-column; implement a layout using position floating and exclusions; implement a layout using grid alignment; implement a layout using regions, grouping, and nesting</h6>
+	</hgroup>
+</li>
+</ul>
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4>Raise and handle an event</h4>
+<h6>Handle common events exposed by DOM (OnBlur, OnFocus, OnClick); declare and handle bubbled events; handle an event by using an anonymous function</h6>	
+
+<h4>Implement exception handling</h4>
+<h6>Set and respond to error codes; throw an exception; request for null checks; implement try-catch-finally blocks</h6>	
+
+<h4>Style HTML text properties</h4>
+<h6>Apply styles to text appearance (color, bold, italics); apply styles to text font (WOFF and @font-face, size); apply styles to text alignment, spacing, and indentation; apply styles to text hyphenation; apply styles for a text drop shadow</h6>	
+<h4>Style HTML box properties</h4>
+<h6>Apply styles to alter appearance attributes (size, border and rounding border corners, outline, padding, margin); apply styles to alter graphic effects (transparency, opacity, background image, gradients, shadow, clipping); apply styles to establish and change an element’s position (static, relative, absolute, fixed)</h6>	
+
+<h4>Structure a CSS file by using CSS selectors</h4>
+<h6>Reference elements correctly; implement inheritance; override inheritance by using !important; style an element based on pseudo-elements and pseudo-classes (for example, :before, :first-line, :first-letter, :target, :lang, :checked, :first-child)</h6>	
+
+<h4>Establish the scope of objects and variables</h4>
+<h6>Define the lifetime of variables; keep objects out of the global namespace; use the “this” keyword to reference an object that fired an event; scope variables locally and globally</h6>	
+
+<h4>Create and implement objects and methods</h4>
+<h6>Implement native objects; create custom objects and custom properties for native objects using prototypes and functions; inherit from an object; implement native methods and create custom methods</h6>	
+
+<h4>Implement program flow</h4>
+<h6>Iterate across collections and array items; manage program decisions by using switch statements, if/then, and operators; evaluate expressions</h6>	
+
+<h4>Validate user input by using JavaScript</h4>
+<h6>Evaluate a regular expression to validate the input format; validate that you are getting the right kind of data type by using built-in functions; prevent code injection</h6>	
+</body>
+</html>
