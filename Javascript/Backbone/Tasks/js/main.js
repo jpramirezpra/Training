@@ -1,7 +1,7 @@
 (function(){
 	window.App = {
-		Models: {}, 
-		Views: {}, 
+		Models: {},
+		Views: {},
 		Collections: {}
 	};
 
@@ -18,7 +18,7 @@
 		},
 	});
 
-	App.Collections.Tasks = Backbone.Collection.extend({ 
+	App.Collections.Tasks = Backbone.Collection.extend({
 			model: App.Models.Task,
 		});
 
@@ -38,8 +38,7 @@
 		addOne: function(task){
 			var taskView = new App.Views.Task({model:task});
 			this.$el.append(taskView.render().el);
-		},	
-
+		},
 
 	});
 

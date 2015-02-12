@@ -78,3 +78,20 @@ list.on('event-name', function(){
 list.on('add', function(item){
 
 });
+
+
+
+
+// COllection View
+
+var ClassListView = Backbone.View.extend({
+  render: function(){
+    this.collection.forEach(function(item){
+      var instanceView = new View({model: item});
+      this.$el.append(instanceView.render().el);
+    });
+  }
+});
+var instanceListView = new ClassListView({collection: list});
+//will need to add to the DOM
+$('#container').html(instanceListView.render().el);
